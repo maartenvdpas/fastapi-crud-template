@@ -1,3 +1,4 @@
+# src/domain
 This is where your domain logic goes, anything from models, repository interfaces 
 and shared services that operate solely within the business domain of your project.
 

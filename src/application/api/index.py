@@ -6,5 +6,5 @@ router = APIRouter(
 )
 
 @router.get(path='/', status_code=200)
-async def test():
+async def index():
     return {'status': 200, 'msg': 'Hello World!'}

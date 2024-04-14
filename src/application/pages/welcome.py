@@ -7,7 +7,7 @@ router = APIRouter(
     tags=['welcome']
 )
 
-templates = Jinja2Templates(directory='src/application/templates')
+templates = Jinja2Templates(directory='src/application/pages/templates')
 
 @router.get('/', response_class=HTMLResponse)
 async def welcome(request: Request):
