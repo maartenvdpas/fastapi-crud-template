@@ -1,19 +1,19 @@
 import os
+from pathlib import Path
+from pydantic_settings import BaseSettings
 from functools import lru_cache
 
-class Config():
-    def __init__(self):
-        """
-        Load your configuration from the environment at load time as fields withing the object, 
-        then provide the config via cache as it should be immutable at runtime.
+class Config(BaseSettings):
+    """
+    Load your configuration from the environment at load time as fields withing the object, 
+    then provide the config via cache as it should be immutable at runtime.
+    """
 
-        Examples
-        self.SECRET_KEY = os.getenv('SECRET_KEY')
-        self.ALGORITHM = os.getenv('ALGORITHM')
-        self.ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES')) 
-        """
-        pass
+    APP_DIR: Path = Path(__file__).resolve().parent.parent
 
+    STATIC_DIR: Path = APP_DIR / "static"
+    TEMPLATE_DIR: Path = APP_DIR / "templates"
+        
 @lru_cache
 def get_config():
     return Config()
