@@ -11,8 +11,8 @@ class Config(BaseSettings):
 
     APP_DIR: Path = Path(__file__).resolve().parent.parent
 
-    STATIC_DIR: Path = APP_DIR / "static"
-    TEMPLATE_DIR: Path = APP_DIR / "templates"
+    STATIC_DIR: Path = APP_DIR / "web/static"
+    TEMPLATE_DIR: Path = APP_DIR / "web/templates"
         
 @lru_cache
 def get_config():

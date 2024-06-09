@@ -2,9 +2,9 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from config.config import get_config
-from routes.welcome import router as WelcomeRouter
-from routes.api.index import router as APIRouter
+from application.config.config import get_config
+from application.web.welcome import router as WelcomeRouter
+from application.api.index import router as APIRouter
 
 app = FastAPI()
 app.mount('/templates', StaticFiles(directory=get_config().TEMPLATE_DIR), name='templates')
