@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:latest
+    hostname: db.local
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=CXxc7ppRGcazuUQL
+    ports:
+      - 5432:5432
+    volumes:
+      - ./.docker/db/datavolume:/var/lib/postgresql/data
