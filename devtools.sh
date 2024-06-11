@@ -32,8 +32,8 @@ help() {
     migrate - Performs an SQL schema migration.
     install - Add and install dependencies.
     upgrade - Upgrades the installed dependencies.
-    run devtools|dev|prod - Run devtools, the project in dev or production mode.
-    stop devtools - Stops devtools.
+    run deps|dev|prod - Run dependencies, the project in dev or production mode.
+    stop deps - Stops devtools.
     "
 }
 
@@ -56,7 +56,7 @@ init() {
     source "$VENV_ACTIVATE_PATH"
 
     # Install dependencies
-    pip install -r $SCRIPT_DIR/requirements.txt
+    install
 
     # Generate env file compatible with the docker compose
     generate_default_env
@@ -133,8 +133,8 @@ migrate() {
 
 run() {
     case "$1" in
-        "devtools")
-            echo Starting devtools...
+        "deps")
+            echo Starting dependencies...
             docker compose up -d > /dev/null
             echo Docker services running
             source "$VENV_ACTIVATE_PATH"
@@ -154,8 +154,8 @@ run() {
 
 stop() {
     case "$1" in
-        "devtools")
-            echo Stopping devtools...
+        "deps")
+            echo Stopping dependencies...
             docker compose down > /dev/null
             echo Docker services stopped
             ;;
