@@ -1,17 +1,19 @@
 #!/bin/bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+VENV_DIR="$SCRIPT_DIR/.venv"
+DOCKER_DIR="$SCRIPT_DIR/.docker"
 
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
-    VENV_ACTIVATE_PATH="$SCRIPT_DIR/.venv/Scripts/activate"
+    VENV_ACTIVATE_PATH="$VENV_DIR/Scripts/activate"
     PYTHON_EXECUTABLE=python
 else
-    VENV_ACTIVATE_PATH="$SCRIPT_DIR/.venv/bin/activate"
+    VENV_ACTIVATE_PATH="$VENV_DIR/bin/activate"
     PYTHON_EXECUTABLE=python3
 fi
 
 generate_default_env() {
-    if [[ ! -f "$SCRIPT_DIR/.env" ]]; then
+    if [[ ! -f $VENV_DIR ]]; then
         cat > .env << EOF
 DATABASE_USER=postgres
 DATABASE_PASSWORD=CXxc7ppRGcazuUQL
@@ -90,7 +92,7 @@ reset() {
         echo 
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             echo "Soft resetting dev environment"
-            rm -rf "$SCRIPT_DIR/.venv"
+            rm -rf $VENV_DIR
         fi
     else
         read -p "Are you sure? This will delete everything but the repository source files! " -n 1 -r
@@ -98,8 +100,8 @@ reset() {
         if [[ $REPLY =~ ^[Yy]$ ]]
         then
             echo "Resetting dev environment"
-            rm -rf "$SCRIPT_DIR/.venv"
-            rm -rf "$SCRIPT_DIR/.docker"
+            rm -rf $VENV_DIR
+            rm -rf $DOCKER_DIR
             rm $SCRIPT_DIR/.env
         else
             echo "Aborting environment reset"
